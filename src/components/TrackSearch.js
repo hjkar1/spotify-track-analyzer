@@ -2,11 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import queryString from 'query-string';
 import { Link, Redirect } from 'react-router-dom';
+import { useContextState } from '../state';
 import { getAuthHeaderConfig } from '../utils';
 
 const TrackSearch = ({ location }) => {
   const [search, setSearch] = useState('');
-  const [trackList, setTrackList] = useState([]);
+  const [{ tracks, loading, error }, dispatch] = useContextState();
 
   const hash = queryString.parse(location.hash);
 
@@ -26,13 +27,21 @@ const TrackSearch = ({ location }) => {
     event.preventDefault();
     const config = getAuthHeaderConfig();
     try {
+      dispatch({ type: 'getTracksStart' });
       const searchResult = await axios.get(
         `https://api.spotify.com/v1/search?q=${search}&type=track`,
         config
       );
-      setTrackList(searchResult.data.tracks.items);
+      const trackList = searchResult.data.tracks.items;
+      dispatch({
+        type: 'getTracksSuccess',
+        tracks: trackList
+      });
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: 'getTracksError',
+        error: error
+      });
     }
   };
 
@@ -43,13 +52,18 @@ const TrackSearch = ({ location }) => {
         <input type="text" onChange={handleChange} value={search} />
         <button>Search</button>
       </form>
-      <div>
-        {trackList.map(track => (
-          <Link key={track.id} to={'/track'}>
-            {track.name}
-          </Link>
-        ))}
-      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          {tracks.map(track => (
+            <Link key={track.id} to={`/track/${track.id}`}>
+              {track.name}
+            </Link>
+          ))}
+        </div>
+      )}
+      <div>{error}</div>
     </Fragment>
   );
 };
