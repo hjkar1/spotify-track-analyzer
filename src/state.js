@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 
-const initialState = { tracks: [], trackData: {}, loading: false, error: '' };
+const initialState = { tracks: [], trackData: null, loading: false, error: '' };
 
 const appReducer = (state, action) => {
   switch (action.type) {
