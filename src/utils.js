@@ -42,6 +42,6 @@ export const getTrackKey = pitchClass => {
     case 11:
       return 'B';
     default:
-      return 'The key could not be detected.';
+      return 'Unknown';
   }
 };
