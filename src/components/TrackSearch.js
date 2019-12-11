@@ -40,7 +40,7 @@ const TrackSearch = ({ location }) => {
     } catch (error) {
       dispatch({
         type: 'getTracksError',
-        error: error
+        error: 'Something went wrong.'
       });
     }
   };
