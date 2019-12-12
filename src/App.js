@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import { AppContext } from './state';
+import { AppContext } from './state/state';
 import reducer from './reducer';
 import TrackSearch from './components/TrackSearch';
 import TrackData from './components/TrackData';

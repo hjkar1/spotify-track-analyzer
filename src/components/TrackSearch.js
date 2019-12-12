@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import queryString from 'query-string';
 import { Link, Redirect } from 'react-router-dom';
-import { useContextState } from '../state';
-import { getTrackSearch } from '../actions';
+import { useContextState } from '../state/state';
+import { getTrackSearch } from '../state/actions';
 
 const TrackSearch = ({ location }) => {
   const [search, setSearch] = useState('');

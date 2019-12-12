@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAuthHeaderConfig } from './utils';
+import { getAuthHeaderConfig } from '../utils';
 
 export const getTrackSearch = async (search, dispatch) => {
   const config = getAuthHeaderConfig();

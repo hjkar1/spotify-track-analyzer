@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { useContextState } from '../state';
-import { getTrackData } from '../actions';
+import { useContextState } from '../state/state';
+import { getTrackData } from '../state/actions';
 import { getTrackKey } from '../utils';
 import BarChart from './BarChart';
 
