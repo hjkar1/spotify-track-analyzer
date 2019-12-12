@@ -1,9 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
 import queryString from 'query-string';
 import { Link, Redirect } from 'react-router-dom';
 import { useContextState } from '../state';
-import { getAuthHeaderConfig } from '../utils';
+import { getTrackSearch } from '../actions';
 
 const TrackSearch = ({ location }) => {
   const [search, setSearch] = useState('');
@@ -23,26 +22,9 @@ const TrackSearch = ({ location }) => {
 
   const handleChange = ({ target: { value } }) => setSearch(value);
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    const config = getAuthHeaderConfig();
-    try {
-      dispatch({ type: 'getTracksStart' });
-      const searchResult = await axios.get(
-        `https://api.spotify.com/v1/search?q=${search}&type=track`,
-        config
-      );
-      const trackList = searchResult.data.tracks.items;
-      dispatch({
-        type: 'getTracksSuccess',
-        tracks: trackList
-      });
-    } catch (error) {
-      dispatch({
-        type: 'getTracksError',
-        error: 'Something went wrong.'
-      });
-    }
+    getTrackSearch(search, dispatch);
   };
 
   return (

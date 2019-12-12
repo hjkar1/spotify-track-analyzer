@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
-import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import { useContextState } from '../state';
-import { getAuthHeaderConfig, getTrackKey } from '../utils';
+import { getTrackData } from '../actions';
+import { getTrackKey } from '../utils';
 import BarChart from './BarChart';
 
 const TrackData = ({
@@ -13,26 +13,7 @@ const TrackData = ({
   const [{ trackData, tracks, loading, error }, dispatch] = useContextState();
 
   useEffect(() => {
-    const fetchTrackData = async () => {
-      const config = getAuthHeaderConfig();
-      try {
-        dispatch({ type: 'getTrackDataStart' });
-        const result = await axios.get(
-          `https://api.spotify.com/v1/audio-features/${trackId}`,
-          config
-        );
-        dispatch({
-          type: 'getTrackDataSuccess',
-          trackData: result.data
-        });
-      } catch (error) {
-        dispatch({
-          type: 'getTrackDataFail',
-          error: 'Audio features not found.'
-        });
-      }
-    };
-    fetchTrackData();
+    getTrackData(trackId, dispatch);
   }, [trackId, dispatch]);
 
   if (!localStorage.getItem('authToken')) {
