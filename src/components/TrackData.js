@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useContextState } from '../state';
 import { getAuthHeaderConfig, getTrackKey } from '../utils';
 import BarChart from './BarChart';
@@ -72,6 +72,7 @@ const TrackData = ({
         </div>
         <div>Beats per minute: {Math.round(trackData.tempo)}</div>
         <BarChart data={chartData} />
+        <Link to="/">Back to search</Link>
       </div>
     );
   };
