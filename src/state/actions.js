@@ -17,7 +17,7 @@ export const getTrackSearch = async (search, dispatch) => {
     });
   } catch (error) {
     dispatch({
-      type: 'getTracksError',
+      type: 'getTracksFail',
       error: 'Something went wrong.'
     });
   }
