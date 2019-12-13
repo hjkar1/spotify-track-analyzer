@@ -21,13 +21,16 @@ const TrackData = ({
     params: { trackId }
   }
 }) => {
-  const [{ trackData, tracks, loading, error }, dispatch] = useContextState();
+  const [
+    { trackData, tracks, loading, error, redirect },
+    dispatch
+  ] = useContextState();
 
   useEffect(() => {
     getTrackData(trackId, dispatch);
   }, [trackId, dispatch]);
 
-  if (!localStorage.getItem('authToken')) {
+  if (!localStorage.getItem('authToken') || redirect) {
     return <Redirect to="/authorize" />;
   }
 

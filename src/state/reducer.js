@@ -4,39 +4,50 @@ const reducer = (state, action) => {
       return {
         ...state,
         loading: true,
-        error: ''
+        error: '',
+        redirect: false
       };
     case 'getTracksSuccess':
       return {
         ...state,
         tracks: action.tracks,
         loading: false,
-        error: ''
+        error: '',
+        redirect: false
       };
     case 'getTracksFail':
       return {
         ...state,
         error: action.error,
-        loading: false
+        loading: false,
+        redirect: false
       };
     case 'getTrackDataStart':
       return {
         ...state,
         loading: true,
-        error: ''
+        error: '',
+        redirect: false
       };
     case 'getTrackDataSuccess':
       return {
         ...state,
         trackData: action.trackData,
         loading: false,
-        error: ''
+        error: '',
+        redirect: false
       };
     case 'getTrackDataFail':
       return {
         ...state,
         error: action.error,
-        loading: false
+        loading: false,
+        redirect: false
+      };
+    case 'redirectToAuth':
+      return {
+        ...state,
+        redirect: true
       };
     default:
       return state;

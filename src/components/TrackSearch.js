@@ -32,7 +32,7 @@ const StyledLink = styled(Link)`
 
 const TrackSearch = ({ location }) => {
   const [search, setSearch] = useState('');
-  const [{ tracks, loading, error }, dispatch] = useContextState();
+  const [{ tracks, loading, error, redirect }, dispatch] = useContextState();
 
   const hash = queryString.parse(location.hash);
 
@@ -42,7 +42,7 @@ const TrackSearch = ({ location }) => {
     }
   }, [hash]);
 
-  if (!localStorage.getItem('authToken') && !hash.access_token) {
+  if ((!localStorage.getItem('authToken') && !hash.access_token) || redirect) {
     return <Redirect to="/authorize" />;
   }
 
