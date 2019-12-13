@@ -1,12 +1,19 @@
 import React from 'react';
-import { XYPlot, XAxis, YAxis, VerticalBarSeries } from 'react-vis';
+import { XYPlot, XAxis, YAxis, HorizontalBarSeries } from 'react-vis';
+import '../../node_modules/react-vis/dist/style.css';
 
 const BarChart = ({ data }) => {
   return (
-    <XYPlot xType="ordinal" width={800} height={300} yDomain={[0, 1]}>
+    <XYPlot
+      yType="ordinal"
+      width={300}
+      height={300}
+      margin={{ left: 100 }}
+      xDomain={[0, 1]}
+    >
       <XAxis />
       <YAxis />
-      <VerticalBarSeries data={data} />
+      <HorizontalBarSeries data={data} />
     </XYPlot>
   );
 };

@@ -48,13 +48,13 @@ const TrackData = ({
 
   const getAudioFeatures = () => {
     const chartData = [
-      { x: 'acousticness', y: trackData.acousticness },
-      { x: 'danceability', y: trackData.danceability },
-      { x: 'energy', y: trackData.energy },
-      { x: 'instrumentalness', y: trackData.instrumentalness },
-      { x: 'liveness', y: trackData.liveness },
-      { x: 'speechiness', y: trackData.speechiness },
-      { x: 'valence', y: trackData.valence }
+      { y: 'acousticness', x: trackData.acousticness },
+      { y: 'danceability', x: trackData.danceability },
+      { y: 'energy', x: trackData.energy },
+      { y: 'instrumentalness', x: trackData.instrumentalness },
+      { y: 'liveness', x: trackData.liveness },
+      { y: 'speechiness', x: trackData.speechiness },
+      { y: 'valence', x: trackData.valence }
     ];
 
     return (
