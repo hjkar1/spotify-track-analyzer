@@ -1,5 +1,15 @@
 import React from 'react';
-import { LinkButton, Container } from './UIComponents';
+import styled from 'styled-components';
+import Container from './Container';
+
+const LinkButton = styled.a`
+  background-color: green;
+  border-radius: 4px;
+  color: white;
+  margin: 1rem;
+  padding: 0.5rem;
+  text-decoration: none;
+`;
 
 const Login = () => {
   return (
