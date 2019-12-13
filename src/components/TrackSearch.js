@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useContextState } from '../state/state';
 import { getTrackSearch } from '../state/actions';
-import { Container } from './UIComponents';
+import Container from './Container';
 
 const SubmitButton = styled.button`
   background-color: green;
