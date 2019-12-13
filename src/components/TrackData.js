@@ -1,9 +1,20 @@
 import React, { Fragment, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 import { useContextState } from '../state/state';
 import { getTrackData } from '../state/actions';
 import { getTrackKey } from '../utils';
 import BarChart from './BarChart';
+import Container from './Container';
+
+const LinkButton = styled(Link)`
+  background-color: green;
+  border-radius: 4px;
+  color: white;
+  margin: 1rem;
+  padding: 0.5rem;
+  text-decoration: none;
+`;
 
 const TrackData = ({
   match: {
@@ -23,7 +34,12 @@ const TrackData = ({
   const getTrackDuration = durationInMilliseconds => {
     const durationInSeconds = durationInMilliseconds / 1000;
     const minutes = Math.round(durationInSeconds / 60);
-    const seconds = Math.round(durationInSeconds % 60);
+    let seconds = Math.round(durationInSeconds % 60);
+
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+
     return `${minutes}:${seconds}`;
   };
 
@@ -39,39 +55,49 @@ const TrackData = ({
     ];
 
     return (
-      <div>
-        <div>Estimated audio features:</div>
-        <div>Duration: {getTrackDuration(trackData.duration_ms)}</div>
-        <div>Key: {getTrackKey(trackData.key)}</div>
-        <div>
+      <Fragment>
+        <div style={{ fontWeight: 'bold', margin: '1rem' }}>
+          Estimated audio features:
+        </div>
+        <div style={{ margin: '1rem' }}>
+          Duration: {getTrackDuration(trackData.duration_ms)}
+        </div>
+        <div style={{ margin: '1rem' }}>Key: {getTrackKey(trackData.key)}</div>
+        <div style={{ margin: '1rem' }}>
           Mode:
           {trackData.mode === 1
-            ? 'major'
+            ? ' major'
             : trackData.mode === 0
-            ? 'minor'
-            : 'Unknown'}
+            ? ' minor'
+            : ' Unknown'}
         </div>
-        <div>Beats per minute: {Math.round(trackData.tempo)}</div>
-        <BarChart data={chartData} />
-        <Link to="/">Back to search</Link>
-      </div>
+        <div style={{ margin: '1rem' }}>
+          Beats per minute: {Math.round(trackData.tempo)}
+        </div>
+        <div style={{ margin: '1.5rem' }}>
+          <BarChart data={chartData} />
+        </div>
+        <LinkButton to="/">Back to search</LinkButton>
+      </Fragment>
     );
   };
 
   const track = tracks.find(track => track.id === trackId);
 
   return (
-    <Fragment>
-      <h1>{track.name}</h1>
-      <div>Artists: {track.artists.map(artist => artist.name).join(', ')}</div>
+    <Container>
+      <h1 style={{ margin: '1rem' }}>{track.name}</h1>
+      <div style={{ margin: '1rem' }}>
+        {track.artists.map(artist => artist.name).join(', ')}
+      </div>
       {loading ? (
-        <div>Loading...</div>
+        <div style={{ margin: '1rem' }}>Loading...</div>
       ) : error ? (
-        error
+        <div style={{ margin: '1rem' }}>{error}</div>
       ) : trackData ? (
         getAudioFeatures()
       ) : null}
-    </Fragment>
+    </Container>
   );
 };
 
