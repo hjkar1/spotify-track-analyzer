@@ -26,8 +26,8 @@ export const getTrackSearch = async (search, dispatch) => {
       });
     } else {
       dispatch({
-        type: 'getTrackDataFail',
-        error: 'Audio features not found.'
+        type: 'getTracksFail',
+        error: 'No tracks found.'
       });
     }
   }
