@@ -68,6 +68,8 @@ const TrackSearch = ({ location }) => {
       </form>
       {loading ? (
         <div style={{ margin: '1rem' }}>Loading...</div>
+      ) : error ? (
+        <div style={{ margin: '1rem' }}>{error}</div>
       ) : (
         <LinkContainer>
           {tracks.map(track => (
@@ -77,7 +79,6 @@ const TrackSearch = ({ location }) => {
           ))}
         </LinkContainer>
       )}
-      <div style={{ margin: '1rem' }}>{error}</div>
     </Container>
   );
 };
