@@ -11,6 +11,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         tracks: action.tracks,
+        nextPageUrl: action.url,
         loading: false,
         error: '',
         redirect: false
@@ -19,6 +20,28 @@ const reducer = (state, action) => {
       return {
         ...state,
         error: action.error,
+        loading: false,
+        redirect: false
+      };
+    case 'loadMoreTracksStart':
+      return {
+        ...state,
+        loading: true,
+        error: '',
+        redirect: false
+      };
+    case 'loadMoreTracksSuccess':
+      return {
+        ...state,
+        tracks: [...state.tracks, ...action.tracks],
+        nextPageUrl: action.url,
+        loading: false,
+        error: '',
+        redirect: false
+      };
+    case 'loadMoreTracksFail':
+      return {
+        ...state,
         loading: false,
         redirect: false
       };

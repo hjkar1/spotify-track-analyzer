@@ -12,10 +12,12 @@ export const getTrackSearch = async (search, dispatch) => {
     );
 
     const trackList = searchResult.data.tracks.items;
+    const nextPageUrl = searchResult.data.tracks.next;
 
     dispatch({
       type: 'getTracksSuccess',
-      tracks: trackList
+      tracks: trackList,
+      url: nextPageUrl
     });
   } catch (error) {
     const errorJSON = error.toJSON();
@@ -28,6 +30,36 @@ export const getTrackSearch = async (search, dispatch) => {
       dispatch({
         type: 'getTracksFail',
         error: 'No tracks found.'
+      });
+    }
+  }
+};
+
+export const loadMoreTracks = async (url, dispatch) => {
+  const config = getAuthHeaderConfig();
+  dispatch({ type: 'loadMoreTracksStart' });
+
+  try {
+    const result = await axios.get(url, config);
+
+    const trackList = result.data.tracks.items;
+    const nextPageUrl = result.data.tracks.next;
+
+    dispatch({
+      type: 'loadMoreTracksSuccess',
+      tracks: trackList,
+      url: nextPageUrl
+    });
+  } catch (error) {
+    const errorJSON = error.toJSON();
+
+    if (errorJSON.message === 'Request failed with status code 401') {
+      dispatch({
+        type: 'redirectToAuth'
+      });
+    } else {
+      dispatch({
+        type: 'loadMoreTracksFail'
       });
     }
   }

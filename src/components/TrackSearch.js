@@ -3,10 +3,10 @@ import queryString from 'query-string';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useContextState } from '../state/state';
-import { getTrackSearch } from '../state/actions';
+import { getTrackSearch, loadMoreTracks } from '../state/actions';
 import Container from './Container';
 
-const SubmitButton = styled.button`
+const Button = styled.button`
   background-color: green;
   border: none;
   border-radius: 4px;
@@ -32,7 +32,10 @@ const StyledLink = styled(Link)`
 
 const TrackSearch = ({ location }) => {
   const [search, setSearch] = useState('');
-  const [{ tracks, loading, error, redirect }, dispatch] = useContextState();
+  const [
+    { tracks, nextPageUrl, loading, error, redirect },
+    dispatch
+  ] = useContextState();
 
   const hash = queryString.parse(location.hash);
 
@@ -53,6 +56,10 @@ const TrackSearch = ({ location }) => {
     getTrackSearch(search, dispatch);
   };
 
+  const handleLoadMore = () => {
+    loadMoreTracks(nextPageUrl, dispatch);
+  };
+
   return (
     <Container>
       <h1 style={{ marginBottom: '1.5rem' }}>Search tracks</h1>
@@ -64,7 +71,7 @@ const TrackSearch = ({ location }) => {
           value={search}
           style={{ padding: '0.5rem' }}
         />
-        <SubmitButton>Search</SubmitButton>
+        <Button>Search</Button>
       </form>
       {loading ? (
         <div style={{ margin: '1rem' }}>Loading...</div>
@@ -77,6 +84,11 @@ const TrackSearch = ({ location }) => {
               {track.name}
             </StyledLink>
           ))}
+          {nextPageUrl ? (
+            <Button onClick={handleLoadMore} style={{ marginTop: '1rem' }}>
+              Load more
+            </Button>
+          ) : null}
         </LinkContainer>
       )}
     </Container>
