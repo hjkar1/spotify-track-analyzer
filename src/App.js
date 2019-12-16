@@ -7,7 +7,13 @@ import TrackSearch from './components/TrackSearch';
 import TrackData from './components/TrackData';
 import Login from './components/Login';
 
-const initialState = { tracks: [], trackData: null, loading: false, error: '' };
+const initialState = {
+  tracks: [],
+  nextPageUrl: null,
+  trackData: null,
+  loading: false,
+  error: ''
+};
 
 const App = () => (
   <AppContext.Provider value={useReducer(reducer, initialState)}>
