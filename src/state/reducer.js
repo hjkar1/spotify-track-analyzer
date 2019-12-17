@@ -12,37 +12,19 @@ const reducer = (state, action) => {
         ...state,
         tracks: action.tracks,
         nextPageUrl: action.url,
-        loading: false,
-        error: '',
-        redirect: false
+        loading: false
       };
     case 'getTracksFail':
       return {
         ...state,
         error: action.error,
-        loading: false,
-        redirect: false
-      };
-    case 'loadMoreTracksStart':
-      return {
-        ...state,
-        loading: true,
-        error: '',
-        redirect: false
+        loading: false
       };
     case 'loadMoreTracksSuccess':
       return {
         ...state,
         tracks: [...state.tracks, ...action.tracks],
         nextPageUrl: action.url,
-        loading: false,
-        error: '',
-        redirect: false
-      };
-    case 'loadMoreTracksFail':
-      return {
-        ...state,
-        loading: false,
         redirect: false
       };
     case 'getTrackDataStart':
@@ -56,16 +38,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         trackData: action.trackData,
-        loading: false,
-        error: '',
-        redirect: false
+        loading: false
       };
     case 'getTrackDataFail':
       return {
         ...state,
         error: action.error,
-        loading: false,
-        redirect: false
+        loading: false
       };
     case 'redirectToAuth':
       return {

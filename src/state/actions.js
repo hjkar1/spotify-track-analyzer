@@ -37,7 +37,6 @@ export const getTrackSearch = async (search, dispatch) => {
 
 export const loadMoreTracks = async (url, dispatch) => {
   const config = getAuthHeaderConfig();
-  dispatch({ type: 'loadMoreTracksStart' });
 
   try {
     const result = await axios.get(url, config);
@@ -56,10 +55,6 @@ export const loadMoreTracks = async (url, dispatch) => {
     if (errorJSON.message === 'Request failed with status code 401') {
       dispatch({
         type: 'redirectToAuth'
-      });
-    } else {
-      dispatch({
-        type: 'loadMoreTracksFail'
       });
     }
   }
