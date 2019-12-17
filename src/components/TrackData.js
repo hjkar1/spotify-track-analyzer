@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useContextState } from '../state/state';
 import { getTrackData } from '../state/actions';
-import Container from './Container';
+import Container from './ui/Container';
 import AudioFeatures from './AudioFeatures';
 
 const TrackData = ({
