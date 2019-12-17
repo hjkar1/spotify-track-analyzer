@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Container from './Container';
+import Container from './ui/Container';
 
 const clientID = process.env.REACT_APP_CLIENT_ID;
 
