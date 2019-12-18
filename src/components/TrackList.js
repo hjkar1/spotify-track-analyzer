@@ -20,7 +20,7 @@ const TrackList = ({ tracks, nextPageUrl, handleLoadMore }) => (
   <LinkContainer>
     {tracks.map(track => (
       <StyledLink key={track.id} to={`/track/${track.id}`}>
-        {track.name}
+        {track.artists.map(artist => artist.name).join(', ')}: {track.name}
       </StyledLink>
     ))}
     {nextPageUrl && (
