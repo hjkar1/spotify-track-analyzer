@@ -1,4 +1,4 @@
-This app enables searching tracks from [Spotify](https://developer.spotify.com/documentation/web-api/) and displaying the [audio features](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/) of the tracks. The authorization is done by logging in with a Spotify account and receiving a temporary [access token](https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow).
+This app enables [searching tracks](https://developer.spotify.com/documentation/web-api/reference/search/search/) from Spotify and displaying the [audio features](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/) of the tracks. The authorization is done by logging in with a Spotify account and receiving a temporary [access token](https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow).
 
 ---
 
