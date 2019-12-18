@@ -1,3 +1,7 @@
+This app enables searching tracks from [Spotify](https://developer.spotify.com/documentation/web-api/) and displaying the [audio features](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/) of the tracks. The authorization is done by logging in with a Spotify account and receiving a temporary [access token](https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow).
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
