@@ -20,9 +20,7 @@ export const getTrackSearch = async (search, dispatch) => {
       url: nextPageUrl
     });
   } catch (error) {
-    const errorJSON = error.toJSON();
-
-    if (errorJSON.message === 'Request failed with status code 401') {
+    if (error.response.status === 401) {
       dispatch({
         type: 'redirectToAuth'
       });
@@ -50,9 +48,7 @@ export const loadMoreTracks = async (url, dispatch) => {
       url: nextPageUrl
     });
   } catch (error) {
-    const errorJSON = error.toJSON();
-
-    if (errorJSON.message === 'Request failed with status code 401') {
+    if (error.response.status === 401) {
       dispatch({
         type: 'redirectToAuth'
       });
