@@ -22,7 +22,7 @@ test('renders all tracks', () => {
   );
 
   const tracks = getAllByText('artist1, artist2: test');
-  expect(tracks).toBeDefined();
+  expect(tracks).toHaveLength(3);
 });
 
 test('displays the load more button if there is more tracks to load', () => {
