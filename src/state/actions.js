@@ -71,9 +71,7 @@ export const getTrackData = async (trackId, dispatch) => {
       trackData: result.data
     });
   } catch (error) {
-    const errorJSON = error.toJSON();
-
-    if (errorJSON.message === 'Request failed with status code 401') {
+    if (error.response.status === 401) {
       dispatch({
         type: 'redirectToAuth'
       });
