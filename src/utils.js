@@ -10,19 +10,17 @@ export const getAuthHeaderConfig = () => {
     return config;
   }
 
-  return null;
+  return;
 };
+
+// Return track duration as minutes and seconds.
 
 export const getTrackDuration = durationInMilliseconds => {
   const durationInSeconds = durationInMilliseconds / 1000;
   const minutes = Math.round(durationInSeconds / 60);
-  let seconds = Math.round(durationInSeconds % 60);
+  const seconds = Math.round(durationInSeconds % 60);
 
-  if (seconds < 10) {
-    seconds = '0' + seconds;
-  }
-
-  return `${minutes}:${seconds}`;
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 };
 
 // Return the key of a track based on the pitch class integer.
